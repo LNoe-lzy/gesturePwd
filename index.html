@@ -10,175 +10,180 @@
             padding: 0;
         }
     </style>
+    <script src="gesturePwd.js"></script>
 </head>
 <body>
 <script type=text/javascript>
-    var stage = document.createElement('div');
-    var inner = '<a id="info">设置手势密码</a><canvas width="300" height="300" id="canvas" style="width: 300px; height: 300px"></canvas>';
-    stage.innerHTML = inner;
-    document.body.appendChild(stage);
-    stage.style['position'] = 'absolute';
-    stage.style['top'] = 0;
-    stage.style['right'] = 0;
-    stage.style['bottom'] = 0;
-    stage.style['left'] = 0;
-    stage.style['display'] = 'flex';
-    stage.style['flex-direction'] = 'column';
-    stage.style['align-items'] = 'center';
-    stage.style['justify-content'] = 'center';
 
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    // 我们另半径和间隔都为一个半径
-    var r = (context.canvas.width - 12) / 10;
-    // 存储圆心的位置
-    var points = [];
-    for (var i = 0; i < 3; i++) {
-        for (var j = 0; j < 3; j++) {
-            var x = (2 + 3 * i) * r + (1 + 2 * i) * 2;
-            var y = (2 + 3 * j) * r + (1 + 2 * j) * 2;
-            points.push({x: x, y: y});
-        }
-    }
-
-    //绘制圆环
-    for (var i = 0, point; point = points[i++];) {
-        context.strokeStyle = '#000';
-        context.lineWidth = 2;
-        context.beginPath();
-        context.arc(point.x, point.y, r, 0, Math.PI * 2);
-        context.closePath();
-        context.stroke();
-
-    }
-
-    // 获取canvas的偏移量
-    var ofT = canvas.offsetTop;
-    var ofL = canvas.offsetLeft;
-
-    // 缓存上一次的位置
-    var start = {x: 0, y: 0};
-    var lines = [];
-    var lineIndex = 0;
-    // 绑定事件
-    canvas.addEventListener('touchstart', function (e) {
-        var x = e.touches[0].clientX - ofL;
-        var y = e.touches[0].clientY - ofT;
-        // 判断是否落在了圆心中
-        if (isInCycle(x, y)) {
-            start.x = isInCycle(x, y).x;
-            start.y = isInCycle(x, y).y;
-            lines.push({
-                startX: isInCycle(x, y).x,
-                startY: isInCycle(x, y).y,
-                endX: isInCycle(x, y).x,
-                endY: isInCycle(x, y).y
-            });
-        }
-    });
-
-    canvas.addEventListener('touchmove', function (e) {
-        var x = e.touches[0].clientX - ofL;
-        var y = e.touches[0].clientY - ofT;
-        context.clearRect(0, 0, 300, 300);
-        for (var i = 0, point; point = points[i++];) {
-            context.strokeStyle = '#000';
-            context.lineWidth = 2;
-            context.beginPath();
-            context.arc(point.x, point.y, r, 0, Math.PI * 2);
-            context.closePath();
-            context.stroke();
-
-        }
-        // 重绘已经存在的路径
-        for (var i = 0, line; line = lines[i++]; ) {
-            context.strokeStyle = '#000';
-            context.lineWidth = 3;
-            context.beginPath();
-            context.moveTo(line.startX, line.startY);
-            context.lineTo(line.endX, line.endY);
-            context.closePath();
-            context.stroke();
-        }
-
-        if (isInCycle(x, y)) {
-            if (isNotInLines(isInCycle(x, y).x, isInCycle(x, y).y)) {
-                lines[lineIndex].endX = isInCycle(x, y).x;
-                lines[lineIndex].endY = isInCycle(x, y).y;
-                lineIndex ++;
-                start.x = isInCycle(x, y).x;
-                start.y = isInCycle(x, y).y;
-                lines.push({
-                    startX: isInCycle(x, y).x,
-                    startY: isInCycle(x, y).y,
-                    endX: isInCycle(x, y).x,
-                    endY: isInCycle(x, y).y
-                });
-            }
-        }
-
-        // 绘制新的线
-        context.strokeStyle = '#000';
-        context.lineWidth = 3;
-        context.beginPath();
-        context.moveTo(start.x, start.y);
-        context.lineTo(x, y);
-        context.closePath();
-        context.stroke();
-
-    });
-
-    canvas.addEventListener('touchend', function (e) {
-        context.clearRect(0, 0, 300, 300);
-        for (var i = 0, point; point = points[i++];) {
-            context.strokeStyle = '#000';
-            context.lineWidth = 2;
-            context.beginPath();
-            context.arc(point.x, point.y, r, 0, Math.PI * 2);
-            context.closePath();
-            context.stroke();
-
-        }
-        // 重绘已经存在的路径
-        for (var i = 0, line; line = lines[i++]; ) {
-            context.strokeStyle = '#000';
-            context.lineWidth = 3;
-            context.beginPath();
-            context.moveTo(line.startX, line.startY);
-            context.lineTo(line.endX, line.endY);
-            context.closePath();
-            context.stroke();
-        }
-
-        document.getElementById('info').innerHTML = '密码设置成功';
-        localStorage.setItem('pwd', JSON.stringify(lines));
-
-        // console.log(lines);
-        console.log(localStorage.getItem('pwd'));
-    });
+    new GesturePwd();
 
 
-    function isInCycle(x, y) {
-        for (var i = 0, point; point = points[i++];) {
-            var rangeXmin = point.x - r;
-            var rangeXmax = point.x + r;
-            var rangeYmin = point.y - r;
-            var rangeYmax = point.y + r;
-            if (x > rangeXmin && y > rangeYmin && x < rangeXmax && y < rangeYmax) {
-                return point;
-            }
-        }
-        return false;
-    }
-
-    function isNotInLines(x, y) {
-        for (var i = 0, line; line = lines[i++];) {
-            if (x === line.startX  && y === line.startY) {
-                return false;
-            }
-        }
-        return true;
-    }
+//    var stage = document.createElement('div');
+//    var inner = '<a id="info">设置手势密码</a><canvas width="300" height="300" id="canvas" style="width: 300px; height: 300px"></canvas>';
+//    stage.innerHTML = inner;
+//    document.body.appendChild(stage);
+//    stage.style['position'] = 'absolute';
+//    stage.style['top'] = 0;
+//    stage.style['right'] = 0;
+//    stage.style['bottom'] = 0;
+//    stage.style['left'] = 0;
+//    stage.style['display'] = 'flex';
+//    stage.style['flex-direction'] = 'column';
+//    stage.style['align-items'] = 'center';
+//    stage.style['justify-content'] = 'center';
+//
+//    var canvas = document.getElementById('canvas');
+//    var context = canvas.getContext('2d');
+//    // 我们令半径和间隔都为一个半径
+//    var r = (context.canvas.width - 12) / 10;
+//    // 存储圆心的位置
+//    var points = [];
+//    for (var i = 0; i < 3; i++) {
+//        for (var j = 0; j < 3; j++) {
+//            var x = (2 + 3 * i) * r + (1 + 2 * i) * 2;
+//            var y = (2 + 3 * j) * r + (1 + 2 * j) * 2;
+//            points.push({x: x, y: y});
+//        }
+//    }
+//
+//    //绘制圆环
+//    for (var i = 0, point; point = points[i++];) {
+//        context.strokeStyle = '#000';
+//        context.lineWidth = 2;
+//        context.beginPath();
+//        context.arc(point.x, point.y, r, 0, Math.PI * 2);
+//        context.closePath();
+//        context.stroke();
+//
+//    }
+//
+//    // 获取canvas的偏移量
+//    var ofT = canvas.offsetTop;
+//    var ofL = canvas.offsetLeft;
+//
+//    // 缓存上一次的位置
+//    var start = {x: 0, y: 0};
+//    var lines = [];
+//    var lineIndex = 0;
+//    // 绑定事件
+//    canvas.addEventListener('touchstart', function (e) {
+//        var x = e.touches[0].clientX - ofL;
+//        var y = e.touches[0].clientY - ofT;
+//        // 判断是否落在了圆心中
+//        if (isInCycle(x, y)) {
+//            start.x = isInCycle(x, y).x;
+//            start.y = isInCycle(x, y).y;
+//            lines.push({
+//                startX: isInCycle(x, y).x,
+//                startY: isInCycle(x, y).y,
+//                endX: isInCycle(x, y).x,
+//                endY: isInCycle(x, y).y
+//            });
+//        }
+//    });
+//
+//    canvas.addEventListener('touchmove', function (e) {
+//        var x = e.touches[0].clientX - ofL;
+//        var y = e.touches[0].clientY - ofT;
+//        context.clearRect(0, 0, 300, 300);
+//        for (var i = 0, point; point = points[i++];) {
+//            context.strokeStyle = '#000';
+//            context.lineWidth = 2;
+//            context.beginPath();
+//            context.arc(point.x, point.y, r, 0, Math.PI * 2);
+//            context.closePath();
+//            context.stroke();
+//
+//        }
+//        // 重绘已经存在的路径
+//        for (var i = 0, line; line = lines[i++]; ) {
+//            context.strokeStyle = '#000';
+//            context.lineWidth = 3;
+//            context.beginPath();
+//            context.moveTo(line.startX, line.startY);
+//            context.lineTo(line.endX, line.endY);
+//            context.closePath();
+//            context.stroke();
+//        }
+//
+//        if (isInCycle(x, y)) {
+//            if (isNotInLines(isInCycle(x, y).x, isInCycle(x, y).y)) {
+//                lines[lineIndex].endX = isInCycle(x, y).x;
+//                lines[lineIndex].endY = isInCycle(x, y).y;
+//                lineIndex ++;
+//                start.x = isInCycle(x, y).x;
+//                start.y = isInCycle(x, y).y;
+//                lines.push({
+//                    startX: isInCycle(x, y).x,
+//                    startY: isInCycle(x, y).y,
+//                    endX: isInCycle(x, y).x,
+//                    endY: isInCycle(x, y).y
+//                });
+//            }
+//        }
+//
+//        // 绘制新的线
+//        context.strokeStyle = '#000';
+//        context.lineWidth = 3;
+//        context.beginPath();
+//        context.moveTo(start.x, start.y);
+//        context.lineTo(x, y);
+//        context.closePath();
+//        context.stroke();
+//
+//    });
+//
+//    canvas.addEventListener('touchend', function (e) {
+//        context.clearRect(0, 0, 300, 300);
+//        for (var i = 0, point; point = points[i++];) {
+//            context.strokeStyle = '#000';
+//            context.lineWidth = 2;
+//            context.beginPath();
+//            context.arc(point.x, point.y, r, 0, Math.PI * 2);
+//            context.closePath();
+//            context.stroke();
+//
+//        }
+//        // 重绘已经存在的路径
+//        for (var i = 0, line; line = lines[i++]; ) {
+//            context.strokeStyle = '#000';
+//            context.lineWidth = 3;
+//            context.beginPath();
+//            context.moveTo(line.startX, line.startY);
+//            context.lineTo(line.endX, line.endY);
+//            context.closePath();
+//            context.stroke();
+//        }
+//
+//        document.getElementById('info').innerHTML = '密码设置成功';
+//        localStorage.setItem('pwd', JSON.stringify(lines));
+//
+//        // console.log(lines);
+//        console.log(localStorage.getItem('pwd'));
+//    });
+//
+//
+//    function isInCycle(x, y) {
+//        for (var i = 0, point; point = points[i++];) {
+//            var rangeXmin = point.x - r;
+//            var rangeXmax = point.x + r;
+//            var rangeYmin = point.y - r;
+//            var rangeYmax = point.y + r;
+//            if (x > rangeXmin && y > rangeYmin && x < rangeXmax && y < rangeYmax) {
+//                return point;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    function isNotInLines(x, y) {
+//        for (var i = 0, line; line = lines[i++];) {
+//            if (x === line.startX  && y === line.startY) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 </script>
 </body>
 </html>
