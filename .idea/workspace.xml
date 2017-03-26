@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b70156a3-e94e-4ac5-b12d-94bbef54b3f4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gesturePwd.js" afterPath="$PROJECT_DIR$/gesturePwd.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
@@ -23,11 +22,9 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="64" column="31" lean-forward="true" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
-              <folding>
-                <marker date="1490497516000" expanded="true" signature="534:561" ph="..." />
-              </folding>
+            <state relative-caret-position="270">
+              <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -35,10 +32,13 @@
       <file leaf-file-name="gesturePwd.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gesturePwd.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="148" column="35" lean-forward="false" selection-start-line="148" selection-start-column="35" selection-end-line="148" selection-end-column="35" />
+            <state relative-caret-position="-2755">
+              <caret line="175" column="44" lean-forward="false" selection-start-line="175" selection-start-column="44" selection-end-line="175" selection-end-column="44" />
               <folding>
-                <marker date="1490498233000" expanded="true" signature="944:971" ph="..." />
+                <marker date="1490514274000" expanded="true" signature="1132:1143" ph="..." />
+                <marker date="1490514274000" expanded="true" signature="1234:1241" ph="..." />
+                <marker date="1490514274000" expanded="true" signature="1234:1256" ph="..." />
+                <marker date="1490514274000" expanded="true" signature="1234:1261" ph="..." />
               </folding>
             </state>
           </provider>
@@ -66,8 +66,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/gesturePwd.js" />
+        <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
   </component>
@@ -215,12 +215,12 @@
       <option name="presentableId" value="Default" />
       <updated>1490438483288</updated>
       <workItem from="1490438484541" duration="933000" />
-      <workItem from="1490486143660" duration="10651000" />
+      <workItem from="1490486143660" duration="18100000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11584000" />
+    <option name="totallyTimeSpent" value="19033000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1275" height="709" extended-state="6" />
@@ -259,9 +259,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1490497516000" expanded="true" signature="534:561" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -270,28 +268,32 @@
         <state relative-caret-position="15">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
           <folding>
-            <marker date="1490498233000" expanded="true" signature="944:971" ph="..." />
+            <marker date="1490514274000" expanded="true" signature="1132:1143" ph="..." />
+            <marker date="1490514274000" expanded="true" signature="1234:1241" ph="..." />
+            <marker date="1490514274000" expanded="true" signature="1234:1256" ph="..." />
+            <marker date="1490514274000" expanded="true" signature="1234:1261" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gesturePwd.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="148" column="35" lean-forward="false" selection-start-line="148" selection-start-column="35" selection-end-line="148" selection-end-column="35" />
+        <state relative-caret-position="-2755">
+          <caret line="175" column="44" lean-forward="false" selection-start-line="175" selection-start-column="44" selection-end-line="175" selection-end-column="44" />
           <folding>
-            <marker date="1490498233000" expanded="true" signature="944:971" ph="..." />
+            <marker date="1490514274000" expanded="true" signature="1132:1143" ph="..." />
+            <marker date="1490514274000" expanded="true" signature="1234:1241" ph="..." />
+            <marker date="1490514274000" expanded="true" signature="1234:1256" ph="..." />
+            <marker date="1490514274000" expanded="true" signature="1234:1261" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" column="31" lean-forward="true" selection-start-line="64" selection-start-column="31" selection-end-line="64" selection-end-column="31" />
-          <folding>
-            <marker date="1490497516000" expanded="true" signature="534:561" ph="..." />
-          </folding>
+        <state relative-caret-position="270">
+          <caret line="18" column="4" lean-forward="false" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
